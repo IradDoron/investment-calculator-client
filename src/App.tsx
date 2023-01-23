@@ -44,13 +44,23 @@ const App = () => {
 	};
 
 	const handleSubmit = () => {
+		const url = URL.production;
+
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*',
+			},
+		};
+
+		const data = JSON.stringify({
+			timeOfInvestment,
+			stockTicket,
+			initialInvestment,
+			monthlyContribution,
+		});
 		axios
-			.post(URL.production, JSON.stringify({
-				timeOfInvestment,
-				stockTicket,
-				initialInvestment,
-				monthlyContribution,
-			}))
+			.post(url, data, config)
 			.then((response) => {
 				setResults(response.data);
 			})
