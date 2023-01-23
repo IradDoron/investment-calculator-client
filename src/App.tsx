@@ -17,6 +17,8 @@ const App = () => {
 
 	const [results, setResults] = useState('');
 
+	console.log(results);
+
 	const handleTimeOfInvestmentChange = (
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
@@ -149,7 +151,7 @@ const App = () => {
 					}}
 				>
 					<Typography variant="h4">Results</Typography>
-					<Typography variant="body1">{results}</Typography>
+					<Typography variant="body1">Placeholder</Typography>
 				</Card>
 			</Stack>
 		</>
