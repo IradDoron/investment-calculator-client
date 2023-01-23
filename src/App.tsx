@@ -4,6 +4,11 @@ import './App.css';
 
 import { Box, Button, Card, Stack, TextField, Typography } from '@mui/material';
 
+const URL = {
+	development: 'http://localhost:5000',
+	production: 'https://investment-calculator-server.vercel.app/',
+};
+
 const App = () => {
 	const [timeOfInvestment, setTimeOfInvestment] = useState(0);
 	const [stockTicket, setStockTicket] = useState('');
@@ -38,7 +43,7 @@ const App = () => {
 
 	const handleSubmit = () => {
 		axios
-			.post('https://investment-calculator-server.vercel.app/', {
+			.post(URL.production, {
 				timeOfInvestment,
 				stockTicket,
 				initialInvestment,
