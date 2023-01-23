@@ -45,12 +45,12 @@ const App = () => {
 
 	const handleSubmit = () => {
 		axios
-			.post(URL.production, {
+			.post(URL.production, JSON.stringify({
 				timeOfInvestment,
 				stockTicket,
 				initialInvestment,
 				monthlyContribution,
-			})
+			}))
 			.then((response) => {
 				setResults(response.data);
 			})
