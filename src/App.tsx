@@ -43,7 +43,7 @@ const App = () => {
 		setMonthlyContribution(Number(event.target.value));
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		const url = URL.production;
 
 		const config = {
@@ -59,14 +59,13 @@ const App = () => {
 			initialInvestment,
 			monthlyContribution,
 		});
-		axios
-			.post(url, data, config)
-			.then((response) => {
-				setResults(response.data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+
+		try {
+			const response = await axios.post(url, data, config);
+			setResults(response.data);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
