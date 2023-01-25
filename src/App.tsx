@@ -1,8 +1,18 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import './App.css';
 
 import { Box, Button, Card, Stack, TextField, Typography } from '@mui/material';
+
+// components
+import { Lines } from './components/Graph';
+
+// store
+import { dataState } from 'store';
+
+// helpers
+import { getFormattedData } from 'utils/helpers';
 
 const URL = {
 	development: 'http://localhost:5000',
@@ -15,9 +25,7 @@ const App = () => {
 	const [startInvest, setStartInvest] = useState(0);
 	const [monthlyContribution, setMonthlyContribution] = useState(0);
 
-	const [results, setResults] = useState('');
-
-	console.log(results);
+	const setData = useSetRecoilState(dataState);
 
 	const handleYearsAgoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setYearsAgo(Number(event.target.value));
@@ -58,7 +66,9 @@ const App = () => {
 
 		try {
 			const response = await axios.post(url, data, config);
-			setResults(response.data);
+			const rawData = response.data;
+			const formattedDate = getFormattedData(rawData);
+			setData(formattedDate);
 		} catch (error) {
 			console.log(error);
 		}
@@ -72,7 +82,6 @@ const App = () => {
 					flexDirection: 'column',
 					justifyContent: 'start-flex',
 					alignItems: 'center',
-					height: '100vh',
 					width: '700px',
 					gap: '24px',
 					margin: '0 auto',
@@ -159,6 +168,7 @@ const App = () => {
 					<Typography variant="body1">Placeholder</Typography>
 				</Card>
 			</Stack>
+			<Lines />
 		</>
 	);
 };
