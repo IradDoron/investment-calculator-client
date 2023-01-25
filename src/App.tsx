@@ -6,35 +6,31 @@ import { Box, Button, Card, Stack, TextField, Typography } from '@mui/material';
 
 const URL = {
 	development: 'http://localhost:5000',
-	production: 'https://investment-calculator-server.vercel.app/',
+	production: 'https://investment-calculator-server.vercel.app/calc',
 };
 
 const App = () => {
-	const [timeOfInvestment, setTimeOfInvestment] = useState(0);
-	const [stockTicket, setStockTicket] = useState('');
-	const [initialInvestment, setInitialInvestment] = useState(0);
+	const [yearsAgo, setYearsAgo] = useState(0);
+	const [ticket, setTicket] = useState('');
+	const [startInvest, setStartInvest] = useState(0);
 	const [monthlyContribution, setMonthlyContribution] = useState(0);
 
 	const [results, setResults] = useState('');
 
 	console.log(results);
 
-	const handleTimeOfInvestmentChange = (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
-		setTimeOfInvestment(Number(event.target.value));
+	const handleYearsAgoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setYearsAgo(Number(event.target.value));
 	};
 
-	const handleStockTicketChange = (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
-		setStockTicket(event.target.value);
+	const handleTicketChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setTicket(event.target.value);
 	};
 
-	const handleInitialInvestmentChange = (
+	const handleStartInvestChange = (
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
-		setInitialInvestment(Number(event.target.value));
+		setStartInvest(Number(event.target.value));
 	};
 
 	const handleMonthlyContributionChange = (
@@ -54,9 +50,9 @@ const App = () => {
 		};
 
 		const data = JSON.stringify({
-			timeOfInvestment,
-			stockTicket,
-			initialInvestment,
+			yearsAgo,
+			ticket,
+			startInvest,
 			monthlyContribution,
 		});
 
@@ -106,16 +102,16 @@ const App = () => {
 							sx={{
 								width: '240px',
 							}}
-							onChange={handleTimeOfInvestmentChange}
-							value={timeOfInvestment}
+							onChange={handleYearsAgoChange}
+							value={yearsAgo}
 						/>
 						<TextField
 							label="Stock Ticket"
 							sx={{
 								width: '240px',
 							}}
-							onChange={handleStockTicketChange}
-							value={stockTicket}
+							onChange={handleTicketChange}
+							value={ticket}
 						/>
 					</Box>
 					<Box
@@ -131,8 +127,8 @@ const App = () => {
 							sx={{
 								width: '240px',
 							}}
-							onChange={handleInitialInvestmentChange}
-							value={initialInvestment}
+							onChange={handleStartInvestChange}
+							value={startInvest}
 						/>
 						<TextField
 							label="Monthly contribution"
