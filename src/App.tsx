@@ -7,15 +7,20 @@ import { Box, Button, Card, Stack, TextField, Typography } from '@mui/material';
 
 // components
 import { Lines } from './components/Graph';
+import { DivYieldAndEarnings } from './components/Graph/DivYieldAndEarnings';
 
 // store
-import { dataState } from 'store';
+import {
+	dividendYieldPerYearState,
+	earningsFromDividendPerYearState,
+	stockPricesState,
+} from 'store';
 
 // helpers
 import { getFormattedData } from 'utils/helpers';
 
 const URL = {
-	development: 'http://localhost:5000',
+	development: 'http://localhost:5000/calc',
 	production: 'https://investment-calculator-server.vercel.app/calc',
 };
 
@@ -25,7 +30,11 @@ const App = () => {
 	const [startInvest, setStartInvest] = useState(0);
 	const [monthlyContribution, setMonthlyContribution] = useState(0);
 
-	const setData = useSetRecoilState(dataState);
+	const setStockPrices = useSetRecoilState(stockPricesState);
+	const setDividendYieldPerYear = useSetRecoilState(dividendYieldPerYearState);
+	const setEarningsFromDividendPerYear = useSetRecoilState(
+		earningsFromDividendPerYearState
+	);
 
 	const handleYearsAgoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setYearsAgo(Number(event.target.value));
@@ -67,8 +76,12 @@ const App = () => {
 		try {
 			const response = await axios.post(url, data, config);
 			const rawData = response.data;
-			const formattedDate = getFormattedData(rawData);
-			setData(formattedDate);
+			const { dividendYieldPerYear, earningsFromDividendPerYear, stockPrices } =
+				rawData;
+			const formattedStockPrices = getFormattedData(stockPrices);
+			setStockPrices(formattedStockPrices);
+			setDividendYieldPerYear(dividendYieldPerYear);
+			setEarningsFromDividendPerYear(earningsFromDividendPerYear);
 		} catch (error) {
 			console.log(error);
 		}
@@ -169,6 +182,7 @@ const App = () => {
 				</Card>
 			</Stack>
 			<Lines />
+			<DivYieldAndEarnings />
 		</>
 	);
 };

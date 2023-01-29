@@ -8,10 +8,10 @@ import { useRecoilValue } from 'recoil';
 import { getFormattedData } from 'utils/helpers';
 
 // store
-import { dataState } from 'store';
+import { stockPricesState } from 'store';
 
 export const Lines = () => {
-	const data = useRecoilValue(dataState);
+	const stockPrices = useRecoilValue(stockPricesState);
 
 	useLayoutEffect(() => {
 		const root = am5.Root.new('chart2div');
@@ -27,14 +27,14 @@ export const Lines = () => {
 		);
 
 		// Create Y-axis
-		var yAxis = chart.yAxes.push(
+		const yAxis = chart.yAxes.push(
 			am5xy.ValueAxis.new(root, {
 				renderer: am5xy.AxisRendererY.new(root, {}),
 			})
 		);
 
 		// Create X-Axis
-		var xAxis = chart.xAxes.push(
+		const xAxis = chart.xAxes.push(
 			am5xy.DateAxis.new(root, {
 				groupData: true,
 				baseInterval: { timeUnit: 'day', count: 1 },
@@ -61,7 +61,7 @@ export const Lines = () => {
 
 			series.strokes.template.set('strokeWidth', 2);
 
-			series.data.setAll(getFormattedData(data));
+			series.data.setAll(getFormattedData(stockPrices));
 		}
 
 		createSeries('Value', 'value');
@@ -100,7 +100,7 @@ export const Lines = () => {
 		return () => {
 			root.dispose();
 		};
-	}, [data]);
+	}, [stockPrices]);
 
 	return <div id="chart2div" style={{ width: '100%', height: '500px' }}></div>;
 };
