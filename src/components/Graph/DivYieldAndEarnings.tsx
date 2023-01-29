@@ -21,7 +21,10 @@ export const DivYieldAndEarnings = () => {
 		earningsFromDividendPerYear: any
 	) => {
 		const formattedData = [] as any;
-
+		console.log('dividendYieldPerYear', dividendYieldPerYear);
+		console.log('earningsFromDividendPerYear', earningsFromDividendPerYear);
+		if (!dividendYieldPerYear || !earningsFromDividendPerYear)
+			return formattedData;
 		for (let i = 0; i < dividendYieldPerYear.length; i++) {
 			const year = dividendYieldPerYear[i].year;
 			const fullDate = new Date(Number(year), 0, 1).getTime();
