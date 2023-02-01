@@ -25,10 +25,13 @@ const URL = {
 };
 
 const App = () => {
-	const [yearsAgo, setYearsAgo] = useState(0);
-	const [ticket, setTicket] = useState('');
-	const [startInvest, setStartInvest] = useState(0);
-	const [monthlyContribution, setMonthlyContribution] = useState(0);
+	const [yearsAgo, setYearsAgo] = useState(20);
+	const [ticket, setTicket] = useState('INTC');
+	const [startInvest, setStartInvest] = useState(500);
+	const [monthlyContribution, setMonthlyContribution] = useState(1000);
+	const [stockFullName, setStockFullName] = useState(
+		'Title Placeholder' as string
+	);
 
 	const setStockPrices = useSetRecoilState(stockPricesState);
 	const setDividendYieldPerYear = useSetRecoilState(dividendYieldPerYearState);
@@ -76,12 +79,18 @@ const App = () => {
 		try {
 			const response = await axios.post(url, data, config);
 			const rawData = response.data;
-			const { dividendYieldPerYear, earningsFromDividendPerYear, stockPrices } =
-				rawData;
+			const {
+				dividendYieldPerYear,
+				earningsFromDividendPerYear,
+				stockPrices,
+				stockFullName: stockFullNameRaw,
+			} = rawData;
+
 			const formattedStockPrices = getFormattedData(stockPrices);
 			setStockPrices(formattedStockPrices);
 			setDividendYieldPerYear(dividendYieldPerYear);
 			setEarningsFromDividendPerYear(earningsFromDividendPerYear);
+			setStockFullName(stockFullNameRaw);
 		} catch (error) {
 			console.log(error);
 		}
@@ -172,14 +181,8 @@ const App = () => {
 						Submit
 					</Button>
 				</Card>
-				<Card
-					sx={{
-						width: '100%',
-					}}
-				>
-					<Typography variant="h4">Results</Typography>
-					<Typography variant="body1">Placeholder</Typography>
-				</Card>
+
+				<Typography variant="h4">{stockFullName}</Typography>
 			</Stack>
 			<Lines />
 			<DivYieldAndEarnings />
