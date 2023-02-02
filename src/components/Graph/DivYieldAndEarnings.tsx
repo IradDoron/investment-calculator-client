@@ -88,6 +88,9 @@ export const DivYieldAndEarnings = () => {
 					yAxis: yAxis,
 					valueYField: field,
 					valueXField: 'date',
+					tooltip: am5.Tooltip.new(root, {
+						labelText: '[bold]{name}[/]\n{valueY}',
+					}),
 				})
 			);
 			series.columns.template.setAll({
@@ -99,8 +102,26 @@ export const DivYieldAndEarnings = () => {
 			series.data.setAll(chartData);
 		}
 
-		createSeries('Series1', 'dividendYield', yAxis1);
-		createSeries('Series2', 'earnings', yAxis2);
+		createSeries('Dividend Yield', 'dividendYield', yAxis1);
+		createSeries('Earnings', 'earnings', yAxis2);
+
+		// Add cursor
+		chart.set('cursor', am5xy.XYCursor.new(root, {}));
+
+		// Add legend
+		let legend = chart.children.push(
+			am5.Legend.new(root, {
+				useDefaultMarker: true,
+				nameField: chart.series.values[0].get('name'),
+				fillField: 'color',
+				strokeField: 'color',
+				centerX: am5.percent(50),
+				x: am5.percent(50),
+				layout: root.verticalLayout,
+			})
+		);
+
+		legend.data.setAll(chart.series.values);
 
 		return () => {
 			root.dispose();

@@ -51,7 +51,10 @@ export const Lines = () => {
 					yAxis: yAxis,
 					valueYField: field,
 					valueXField: 'date',
-					tooltip: am5.Tooltip.new(root, {}),
+					tooltip: am5.Tooltip.new(root, {
+						// labelText: '[bold]{name}[/]\n{valueX.formatDate()}: {valueY}',
+						labelText: '[bold]{name}[/]\n{valueY}',
+					}),
 					legendLabelText: '{name}',
 					legendValueText: '{valueY}',
 					legendRangeLabelText: '{valueY.open}-{valueY.close}',
@@ -96,6 +99,21 @@ export const Lines = () => {
 				orientation: 'horizontal',
 			})
 		);
+
+		// Add legend
+		let legend = chart.children.push(
+			am5.Legend.new(root, {
+				useDefaultMarker: true,
+				nameField: chart.series.values[0].get('name'),
+				fillField: 'color',
+				strokeField: 'color',
+				centerX: am5.percent(50),
+				x: am5.percent(50),
+				layout: root.verticalLayout,
+			})
+		);
+
+		legend.data.setAll(chart.series.values);
 
 		return () => {
 			root.dispose();
