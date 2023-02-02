@@ -39,7 +39,7 @@ export const DivYieldAndEarnings = () => {
 	};
 
 	useLayoutEffect(() => {
-		var root = am5.Root.new('chart3div');
+		const root = am5.Root.new('chart3div');
 
 		const chartData = formatData(
 			dividendYieldPerYear,
@@ -48,7 +48,7 @@ export const DivYieldAndEarnings = () => {
 
 		root.setThemes([am5themes_Animated.new(root)]);
 
-		var chart = root.container.children.push(
+		const chart = root.container.children.push(
 			am5xy.XYChart.new(root, {
 				panY: false,
 				wheelY: 'zoomX',
@@ -57,20 +57,20 @@ export const DivYieldAndEarnings = () => {
 		);
 
 		// Craete Y-axis
-		var yAxis1 = chart.yAxes.push(
+		const yAxis1 = chart.yAxes.push(
 			am5xy.ValueAxis.new(root, {
 				renderer: am5xy.AxisRendererY.new(root, {}),
 			})
 		);
 
-		var yAxis2 = chart.yAxes.push(
+		const yAxis2 = chart.yAxes.push(
 			am5xy.ValueAxis.new(root, {
 				renderer: am5xy.AxisRendererY.new(root, {}),
 			})
 		);
 
 		// Create X-Axis
-		var xAxis = chart.xAxes.push(
+		const xAxis = chart.xAxes.push(
 			am5xy.DateAxis.new(root, {
 				baseInterval: { timeUnit: 'year', count: 1 },
 				renderer: am5xy.AxisRendererX.new(root, {
@@ -81,7 +81,7 @@ export const DivYieldAndEarnings = () => {
 
 		// Create series
 		function createSeries(name: string, field: string, yAxis: any) {
-			var series = chart.series.push(
+			const series = chart.series.push(
 				am5xy.ColumnSeries.new(root, {
 					name: name,
 					xAxis: xAxis,
@@ -91,6 +91,7 @@ export const DivYieldAndEarnings = () => {
 					tooltip: am5.Tooltip.new(root, {
 						labelText: '[bold]{name}[/]\n{valueY}',
 					}),
+					legendValueText: '{valueY}',
 				})
 			);
 			series.columns.template.setAll({

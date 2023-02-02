@@ -2,9 +2,7 @@
 - [ ] [Frontend: https://investment-calculator-irad-matan.netlify.app/](https://investment-calculator-irad-matan.netlify.app/)
 
 ## Features requests (in priority order)
-- [ ] Add legends to the graphs
-- [ ] Add subtitles to the graphs
-- [ ] Add data numbers near the cursor
+- [ ] Add a range selector
 - [ ] Add mobile support
 - [ ] Add ability for select a range from the chart and calculate changing precent
 - [ ] Add a loader when the data is loading
@@ -20,5 +18,7 @@
     - [x] Add dividend per year graph
     - [x] Add dividend yield per year graph
 - [x] Add a title as the full name of the stock
-    - [ ] Get it from the backend with yahoo finance api (ticket to name)
+    - [x] Get it from the backend with yahoo finance api (ticket to name)
+- [x] Add legends to the graphs
+- [x] Add data numbers near the cursor
 

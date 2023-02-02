@@ -52,13 +52,9 @@ export const Lines = () => {
 					valueYField: field,
 					valueXField: 'date',
 					tooltip: am5.Tooltip.new(root, {
-						// labelText: '[bold]{name}[/]\n{valueX.formatDate()}: {valueY}',
 						labelText: '[bold]{name}[/]\n{valueY}',
 					}),
-					legendLabelText: '{name}',
 					legendValueText: '{valueY}',
-					legendRangeLabelText: '{valueY.open}-{valueY.close}',
-					legendRangeValueText: '{valueY.low}-{valueY.high}',
 				})
 			);
 
