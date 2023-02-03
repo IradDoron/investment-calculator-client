@@ -6,6 +6,7 @@ import './App.css';
 import { Box, Button, Card, Stack, TextField, Typography } from '@mui/material';
 
 // components
+import { CSVReader } from 'CSVReader';
 import { Lines } from './components/Graph';
 import { DivYieldAndEarnings } from './components/Graph/DivYieldAndEarnings';
 
@@ -98,7 +99,8 @@ const App = () => {
 
 	return (
 		<>
-			<Stack
+			<CSVReader />
+			{/* <Stack
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
@@ -185,7 +187,7 @@ const App = () => {
 				<Typography variant="h4">{stockFullName}</Typography>
 			</Stack>
 			<Lines />
-			<DivYieldAndEarnings />
+			<DivYieldAndEarnings /> */}
 		</>
 	);
 };

@@ -12,6 +12,7 @@
 - [ ] Supporting the index of the multiple stocks
 - [ ] Add a button to download the chart as an image
 - [ ] Add a button to download the chart as a csv file
+- [ ] When there are no dividends, show a message
 
 ## Completed features
 - [x] Create new chart with the series:
