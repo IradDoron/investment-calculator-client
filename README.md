@@ -6,7 +6,6 @@
 - [ ] Add mobile support
 - [ ] Add ability for select a range from the chart and calculate changing precent
 - [ ] Add a loader when the data is loading
-- [ ] Add a selection menu for the stock tickets
 - [ ] Add an option to select stock tickets by company name
 - [ ] Support multiple graphs
 - [ ] Supporting the index of the multiple stocks
@@ -22,4 +21,6 @@
     - [x] Get it from the backend with yahoo finance api (ticket to name)
 - [x] Add legends to the graphs
 - [x] Add data numbers near the cursor
+- [x] Add a selection menu for the stock tickets
+
 

@@ -1,12 +1,19 @@
+// imports from 3rd party libraries
+import {
+	Autocomplete,
+	Box,
+	Button,
+	Card,
+	Stack,
+	TextField,
+	Typography,
+} from '@mui/material';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import './App.css';
 
-import { Box, Button, Card, Stack, TextField, Typography } from '@mui/material';
-
 // components
-import { CSVReader } from 'CSVReader';
 import { Lines } from './components/Graph';
 import { DivYieldAndEarnings } from './components/Graph/DivYieldAndEarnings';
 
@@ -19,6 +26,9 @@ import {
 
 // helpers
 import { getFormattedData } from 'utils/helpers';
+
+// data
+import stockNames from 'data/stockNames.json';
 
 const URL = {
 	development: 'http://localhost:5000/calc',
@@ -40,6 +50,8 @@ const App = () => {
 		earningsFromDividendPerYearState
 	);
 
+	const [stockNamesDict, setStockNamesDict] = useState({} as any);
+
 	const handleYearsAgoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setYearsAgo(Number(event.target.value));
 	};
@@ -59,6 +71,11 @@ const App = () => {
 	) => {
 		setMonthlyContribution(Number(event.target.value));
 	};
+
+	useEffect(() => {
+		const stockNamesDict = JSON.parse(JSON.stringify(stockNames));
+		setStockNamesDict(stockNamesDict);
+	}, []);
 
 	const handleSubmit = async () => {
 		const url = URL.production;
@@ -99,8 +116,7 @@ const App = () => {
 
 	return (
 		<>
-			<CSVReader />
-			{/* <Stack
+			<Stack
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
@@ -138,13 +154,25 @@ const App = () => {
 							onChange={handleYearsAgoChange}
 							value={yearsAgo}
 						/>
-						<TextField
+						{/* <TextField
 							label="Stock Ticket"
 							sx={{
 								width: '240px',
 							}}
 							onChange={handleTicketChange}
 							value={ticket}
+						/> */}
+						<Autocomplete
+							id="stock-name"
+							options={Object.keys(stockNamesDict)}
+							getOptionLabel={(option) => option}
+							style={{ width: 300 }}
+							renderInput={(params) => (
+								<TextField {...params} label="Stock Name" margin="normal" />
+							)}
+							onChange={(event, newValue) => {
+								if (newValue) setTicket(newValue);
+							}}
 						/>
 					</Box>
 					<Box
@@ -187,7 +215,7 @@ const App = () => {
 				<Typography variant="h4">{stockFullName}</Typography>
 			</Stack>
 			<Lines />
-			<DivYieldAndEarnings /> */}
+			<DivYieldAndEarnings />
 		</>
 	);
 };
