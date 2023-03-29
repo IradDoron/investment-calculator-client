@@ -24,3 +24,23 @@
 - [x] Add a selection menu for the stock tickets
 
 
+give to matan array:
+
+{
+    yearsAgo: number (ex: 5),
+    startInvest: number (ex: 10000),
+    monthlyContribution: number (ex: 100),
+    ticketsAndIndexes:
+        [
+            {
+                ticket: string (ex: "INTC"),
+                index: number (ex: 0),
+            }
+        ]
+}
+
+
+
+
+
+

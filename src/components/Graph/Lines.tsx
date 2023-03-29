@@ -5,13 +5,13 @@ import { useLayoutEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 // helpers
-import { getFormattedData } from 'utils/helpers';
+// import { getFormattedData } from 'utils/helpers';
 
 // store
-import { stockPricesState } from 'store';
+import { stockPricesListState } from 'store';
 
 export const Lines = () => {
-	const stockPrices = useRecoilValue(stockPricesState);
+	const stockPrices = useRecoilValue(stockPricesListState);
 
 	useLayoutEffect(() => {
 		const root = am5.Root.new('chart2div');
@@ -60,7 +60,7 @@ export const Lines = () => {
 
 			series.strokes.template.set('strokeWidth', 2);
 
-			series.data.setAll(getFormattedData(stockPrices));
+			// series.data.setAll(getFormattedData(stockPrices));
 		}
 
 		createSeries('Value', 'value');
